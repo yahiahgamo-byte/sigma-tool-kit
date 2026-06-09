@@ -25,3 +25,12 @@ You can inject the **Sigma Tool Kit** commands directly into your system with a 
 
 ```bash
 curl -sSL [https://raw.githubusercontent.com/yahiahgamo-byte/sigma-tool-kit/main/install.sh](https://raw.githubusercontent.com/yahiahgamo-byte/sigma-tool-kit/main/install.sh) | bash
+
+## 📦 Prerequisites / المتطلبات الخارجية
+
+Before installing, make sure to install the required system dependencies for the security and sound functions to work properly:
+
+قبل التثبيت، تأكد من تثبيت الحزم الخارجية اللازمة لعمل دالات الحماية والصوت بشكل صحيح:
+
+```bash
+sudo apt update && sudo apt install sox libsox-fmt-pulse clamav rkhunter ufw network-manager python3-venv -y
