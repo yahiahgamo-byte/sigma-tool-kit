@@ -87,37 +87,6 @@ update() {
 	sudo apt update && sudo apt upgrade
 	beeb
 }
-secureme() {
-	echo "🛡️ Starting Security Protocol..."
-	sudo ufw enable 
-	echo "🔄 Updating virus database..."
-    	sudo systemctl stop clamav-freshclam 2>/dev/null
-    	sudo freshclam
-    	sudo systemctl start clamav-freshclam 2>/dev/null
-    	echo "🔍 Scanning for Rootkits..."
-    	sudo rkhunter --check --sk
-	echo "✅ System Secured!"
-	beeb 0.1 1000
-   	beeb 0.1 500
-    	beeb 0.4 1200
-	SCAN_RESULT=$(sudo rkhunter --check --sk --nocolor | grep "Warning" | grep -v "lwp-request")
-    if [ -n "$SCAN_RESULT" ]; then
-        echo "🚨 ALERT: UNKNOWN THREAT DETECTED!"
-        echo "$SCAN_RESULT"
-        sudo nmcli networking off
-        sudo ufw default deny incoming
-        sudo ufw default deny outgoing
-        sudo ufw enable
-        for i in {1..3}; do
-            beeb 0.2 800 ; beeb 0.2 400
-        done
-        echo "🔒 NETWORK ISOLATED. SYSTEM LOCKED."
-    else
-        echo "✅ No new threats. System is clean."
-        sudo rkhunter --propupd
-        beeb 0.1 1000 ; beeb 0.1 500 ; beeb 0.5 1300
-    fi
-}
 pyproject()
 {
 	echo "Starting your task..."
